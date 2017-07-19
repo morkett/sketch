@@ -16,7 +16,7 @@
 
   const ctx = canvas.getContext('2d');
 
-    const colorPicker = document.querySelector('.colorSelector');
+  const colorPicker = document.querySelector('.colorSelector');
 
   //canvas size
   // canvas.width = window.innerWidth;
@@ -35,17 +35,13 @@
 
   let hue = 0;
   let direction = true;
-  const changeHue = false;
+  let changeHue = false;
 
   function draw(e) {
     if(!isDrawing) return;
-    console.log(e);
-    // ctx.strokeStyle = `hsla(${hue}, 100%, 50%, 1)`;
-    ctx.strokeStyle = colorPicker.value;
     ctx.lineWidth = 10;
     ctx.beginPath();
     // start from
-
     ctx.moveTo(lastX, lastY);
     // go to
     ctx.lineTo(e.offsetX, e.offsetY);
@@ -55,10 +51,14 @@
     // es6
     [lastX, lastY] = [e.offsetX, e.offsetY];
     if(changeHue === true) {
+      ctx.strokeStyle = `hsla(${hue}, 100%, 50%, 1)`;
       hue++;
+      console.log(ctx.strokeStyle);
       if(hue >= 360) {
         hue = 0;
       }
+    } else {
+      ctx.strokeStyle = colorPicker.value;
     }
     if(ctx.lineWidth <= 20 || ctx.lineWidth <= 10) {
       direction = !direction;
@@ -116,7 +116,32 @@
     }
   }
 
+  //RainbowTool
+  const rainbow = document.querySelector('.rainbow');
+  let canRain = false;
+  rainbow.addEventListener('click', rain);
 
+
+  function rain() {
+    canRain = !canRain;
+    activeTool(rainbow, canRain);
+    if (canRain) {
+      changeHue = true;
+      console.log('rainbox active');
+    } else {
+      changeHue = false;
+    }
+  }
+
+  colorPicker.addEventListener('click', selectColor);
+
+  function selectColor() {
+    console.log('clicked');
+    canRain = false;
+    activeTool(rainbow, canRain);
+    changeHue = false;
+    console.log({changeHue}, {canRain});
+  }
 
 
 
