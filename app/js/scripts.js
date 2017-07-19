@@ -15,6 +15,7 @@
   const colorPicker = document.querySelector('.colorSelector');
   const brushSize = document.querySelector('.brushSize');
   const brushSizePreview = document.querySelector('.brushSizePreview');
+  const brushOpacity = document.querySelector('.brushOpacity');
 
   //canvas size
   // canvas.width = window.innerWidth;
@@ -38,7 +39,6 @@
     if(!isDrawing) return;
     // ctx.lineWidth = 10;
     ctx.lineWidth = brushSize.value;
-
     ctx.beginPath();
     // start from
     ctx.moveTo(lastX, lastY);
@@ -50,7 +50,7 @@
     // es6
     [lastX, lastY] = [e.offsetX, e.offsetY];
     if(changeHue === true) {
-      ctx.strokeStyle = `hsla(${hue}, 100%, 50%, 1)`;
+      ctx.strokeStyle = `hsla(${hue}, 100%, 50%, ${brushOpacity.value})`;
       hue++;
       console.log(ctx.strokeStyle);
       if(hue >= 360) {
@@ -58,13 +58,10 @@
       }
     } else {
       const hex = colorPicker.value.replace('#', '');
-      console.log({hex});
       // transformToRGBA
-      const rgba = hexToRgb(hex);
-      console.log({rgba});
+      // const rgba = hexToRgb(hex);
       const hsl = rgbToHsl(hex);
-      ctx.strokeStyle = `hsla(${hsl[0]},${hsl[1]}%,${hsl[2]}%,.5)`;
-      console.log({hsl});
+      ctx.strokeStyle = `hsla(${hsl[0]},${hsl[1]}%,${hsl[2]}%,${brushOpacity.value})`;
     }
 
     // save canvas image as data url (png format by default)
@@ -148,6 +145,18 @@
     brushSizePreview.style.height = brushSize.value + 'px';
     brushSizePreview.style.borderRadius = brushSize.value + 'px';
     brushSize.value;
+  }
+
+  brushOpacity.addEventListener('mousemove', changeBrushOpacity);
+  brushOpacity.addEventListener('click', changeBrushOpacity);
+
+  function changeBrushOpacity() {
+    console.log(brushOpacity.value);
+    brushOpacity.value = brushOpacity.value;
+    // brushSizePreview.style.width = brushSize.value + 'px';
+    // brushSizePreview.style.height = brushSize.value + 'px';
+    // brushSizePreview.style.borderRadius = brushSize.value + 'px';
+    // brushSize.value;
   }
 
 
