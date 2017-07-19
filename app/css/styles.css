@@ -1,5 +1,12 @@
 html, body {
   margin:0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body {
+  min-height: 100vh;
+  min-width: 100vw;
 }
 img {
   position: absolute;
@@ -8,4 +15,9 @@ img {
   left: 0;
   width: 150px;
   height: 150px;
+}
+
+#draw {
+  border: 1px dashed black;
+  cursor: crosshair !important;
 }
