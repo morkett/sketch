@@ -75,6 +75,7 @@ input[type="range"] {
   height: 10px;
   border-radius: 10px;
   background: #e53935;
+  display: block;
   /*make absolute to stop radius messing up*/
   /*position: absolute;*/
 }
