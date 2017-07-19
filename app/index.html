@@ -1,18 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>HTML5 Canvas</title>
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body>
-<canvas id="draw" width="800" height="800"></canvas>
-<img id="canvasImg">
-<div class="toolbar">
-  <div class="tool eraser">E</div>
-</div>
+
+<body
+  ondragover="dragOver(event)"
+  ondrop="drop(event)">
+
+  <canvas id="draw" width="800" height="800"></canvas>
+
+  <!-- <div
+    class="drag imgCnt"
+    draggable="true"
+    ondragstart="dragStart(event)"
+    id="img-drag"> -->
+        <img id="canvasImg" draggable="true"
+        ondragstart="dragStart(event)" src="images/bg.png"
+        class="drag"
+        />
+  <!-- </div> -->
+
+  <div
+    class="toolbar drag" id="drag-tool"
+    draggable="true"
+    ondragstart="dragStart(event)">
+    <div class="tool eraser">E</div>
+  </div>
+
+  <script src="js/scripts.js" charset="utf-8"></script>
+  <script src="js/drag.js" charset="utf-8"></script>
 
 </body>
-<script src="js/scripts.js" charset="utf-8"></script>
+
+
 </html>
