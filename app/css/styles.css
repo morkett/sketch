@@ -21,3 +21,21 @@ img {
   border: 1px dashed black;
   cursor: crosshair !important;
 }
+
+.toolbar {
+  position: absolute;
+  left: 20px;
+  top: 200px;
+  border: 1px solid black;
+  height: 250px;
+  width: 100px;
+}
+
+.tool {
+  height: 50px;
+  width: 50px;
+  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
