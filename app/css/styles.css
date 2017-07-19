@@ -10,21 +10,40 @@ body {
   background:rgb(98,98,98);
 }
 
-img {
-  position: absolute;
-  border: 5px solid black;
+.imgNav {
+  height: 250px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #535353;
   top: 0;
   left: 0;
-  width: 150px;
-  height: 150px;
+  position: absolute;
+
+  /*border-radius: 5px;*/
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+
+img {
+  border: 5px solid #434343;
+  border: 5px solid #434343;
+  width: 375px;
+  height: 200px;
   display: block;
   background: #fff;
+  border-radius: 5px;
 }
 
 #draw {
   /*border: 1px dashed black;*/
   background: #fff;
   cursor: crosshair !important;
+  /*transform: scale(2);*/
 }
 
 /*TOOLS*/
@@ -33,7 +52,7 @@ img {
   position: absolute;
   left: 20px;
   top: 200px;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   height: 253px;
   width: 104px;
   display: flex;
@@ -41,16 +60,41 @@ img {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  background: #535353;
+  /*border-radius: 5px;*/
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.toolTitle, .imgNavTitle {
+  background: #434343;
+  height: 20px;
+  width: 100%;
+  border-radius: inherit;
+  color: #dcdcdc;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 5px;
+  font-size: 10px;
+}
+
+.imgNavTitle {
+  transform: translateY(-15px);
 }
 
 .tool {
   height: 50px;
   width: 50px;
-  border: 1px solid black;
+  border: 1px solid transparent;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  background: #535353;
+  color: #dcdcdc;
+  border-radius: 5px;
+
   /*absolute positioning for drag + remove attribute style on click of x to return to relative and start position*/
   /*position: absolute;*/
 }
@@ -58,12 +102,21 @@ img {
 input[type="color"] {
 	-webkit-appearance: none;
   background: transparent;
+  position: absolute;
+  bottom: 2px;
+  left: 27px;
+  border-radius: 5px;
+
 }
+
+
 input[type="color"]::-webkit-color-swatch-wrapper {
 	padding: 2px 1px;
 }
 input[type="color"]::-webkit-color-swatch {
 	border: none;
+  border-radius: 5px;
+  border: 2px solid #383838;
 }
 
 input[type="range"] {
@@ -81,7 +134,8 @@ input[type="range"] {
 }
 
 .active {
-  border-color: red;
+  background: #383838;
+  border-color: #636363;
 }
 
 .drag {

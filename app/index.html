@@ -12,12 +12,17 @@
   ondragover="dragOver(event)"
   ondrop="drop(event)">
 
-  <canvas id="draw" width="800" height="800"></canvas>
+  <canvas id="draw" width="800" height="450"></canvas>
   <!-- <span class="preview"></span> -->
-  <img id="canvasImg" draggable="true"
-  ondragstart="dragStart(event)" src="images/bg.png"
-  class="drag"
+  <div class="imgNav drag"
+  draggable="true"
+  ondragstart="dragStart(event)"
+  src="images/bg.png"
+  id="imgNav">
+  <div class="imgNavTitle">&#x2715;</div>
+    <img id="canvasImg" draggable="false"
   />
+</div>
 <label for="brushSize">Brush Size</label>
 <label for="brushSize" class="brushSizePreview"></label>
 <input type="range" class="tool brushSize" id="brushSize" value="10" min="1" max="200">
@@ -27,6 +32,7 @@
     class="toolbar drag" id="drag-tool"
     draggable="true"
     ondragstart="dragStart(event)">
+    <div class="toolTitle">&#x2715;</div>
     <div class="tool eraser" draggable="true"
     ondragstart="dragStart(event)" id="eraserTool">E</div>
     <div class="tool rainbow">R</div>
