@@ -36,7 +36,13 @@
   let changeHue = false;
 
   function draw(e) {
-    if(!isDrawing) return;
+    if(!isDrawing) {
+      changeBrushSize();
+      changeBrushOpacity();
+      return;
+
+    }
+
     // ctx.lineWidth = 10;
     ctx.lineWidth = brushSize.value;
     ctx.beginPath();
@@ -63,6 +69,9 @@
       const hsl = rgbToHsl(hex);
       ctx.strokeStyle = `hsla(${hsl[0]},${hsl[1]}%,${hsl[2]}%,${brushOpacity.value})`;
     }
+
+    changeBrushSize();
+    changeBrushOpacity();
 
     // save canvas image as data url (png format by default)
     const dataURL = canvas.toDataURL('image/png');
@@ -144,19 +153,21 @@
     brushSizePreview.style.width = brushSize.value + 'px';
     brushSizePreview.style.height = brushSize.value + 'px';
     brushSizePreview.style.borderRadius = brushSize.value + 'px';
-    brushSize.value;
+    const hex = colorPicker.value.replace('#', '');
+    const hsl = rgbToHsl(hex);
+    ctx.strokeStyle = `hsla(${hsl[0]},${hsl[1]}%,${hsl[2]}%,${brushOpacity.value})`;
+
+    brushSizePreview.style.background = ctx.strokeStyle;
   }
 
   brushOpacity.addEventListener('mousemove', changeBrushOpacity);
   brushOpacity.addEventListener('click', changeBrushOpacity);
 
   function changeBrushOpacity() {
-    console.log(brushOpacity.value);
-    brushOpacity.value = brushOpacity.value;
-    // brushSizePreview.style.width = brushSize.value + 'px';
-    // brushSizePreview.style.height = brushSize.value + 'px';
-    // brushSizePreview.style.borderRadius = brushSize.value + 'px';
-    // brushSize.value;
+    const hex = colorPicker.value.replace('#', '');
+    const hsl = rgbToHsl(hex);
+    ctx.strokeStyle = `hsla(${hsl[0]},${hsl[1]}%,${hsl[2]}%,${brushOpacity.value})`;
+    changeBrushSize();
   }
 
 
