@@ -1,8 +1,6 @@
-// TODO: add a selection of BUTTONS
 // TODO: choose to hide buttons with key press
 // TODO:transparency
 // TODO: save image
-
 // TODO: background-colour
 // TODO: styles
 // TODO: show preview on brush
@@ -171,34 +169,7 @@
   }
 
 
-
-
-
-
-// //Preview Move
-//   const body = document.querySelector('body');
-//   const preview = document.querySelector('.preview');
-// // preview.style.right = 100;
-//
-//   body.addEventListener('mousemove', (e) =>  {
-//     preview.style.backgroundColor = `hsla(${hue}, 100%, 50%, 1)`;
-//     preview.style.top = e.clientY + 10 + 'px';
-//     preview.style.left = e.clientX + 10 + 'px';
-//     console.log(body);
-//
-//   });
-
-
-//CONVERT HEX TO RGB TO HSL
-  function hexToRgb(hex) {
-    const bigint = parseInt(hex, 16);
-    const r = (bigint >> 16) & 255;
-    const g = (bigint >> 8) & 255;
-    const b = bigint & 255;
-
-    return r + ',' + g + ',' + b;
-  }
-
+//CONVERT COLOURS
 
   function rgbToHsl(hex){
 
@@ -226,3 +197,23 @@
 
     return [Math.floor(h * 360), Math.floor(s * 100), Math.floor(l * 100)];
   }
+
+
+
+
+
+
+
+
+  // //Preview Move
+  //   const body = document.querySelector('body');
+  //   const preview = document.querySelector('.preview');
+  // // preview.style.right = 100;
+  //
+  //   body.addEventListener('mousemove', (e) =>  {
+  //     preview.style.backgroundColor = `hsla(${hue}, 100%, 50%, 1)`;
+  //     preview.style.top = e.clientY + 10 + 'px';
+  //     preview.style.left = e.clientX + 10 + 'px';
+  //     console.log(body);
+  //
+  //   });
