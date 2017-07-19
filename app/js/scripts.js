@@ -90,13 +90,16 @@
   const eraser = document.querySelector('.eraser');
 
   eraser.addEventListener('click', erase);
+  let canErase = false;
 
   function erase() {
-
-    let canErase = false;
     canErase = !canErase;
+    console.log(canErase);
     if (canErase) {
       console.log('erase active');
       ctx.globalCompositeOperation='destination-out';
+    } else {
+      console.log('erase nont active');
+      ctx.globalCompositeOperation='source-over';
     }
   }
