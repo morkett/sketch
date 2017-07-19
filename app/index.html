@@ -13,7 +13,7 @@
   ondrop="drop(event)">
 
   <canvas id="draw" width="800" height="800"></canvas>
-  <span class="preview"></span>
+  <!-- <span class="preview"></span> -->
   <img id="canvasImg" draggable="true"
   ondragstart="dragStart(event)" src="images/bg.png"
   class="drag"
@@ -25,7 +25,9 @@
     draggable="true"
     ondragstart="dragStart(event)">
     <div class="tool eraser">E</div>
-    <input type="color" class="tool colorSelector" value="#e53935"></div>
+    <div class="tool rainbow">R</div>
+    <input type="color" class="tool colorSelector" value="#e53935">
+  </div>
   <script src="js/scripts.js" charset="utf-8"></script>
   <script src="js/drag.js" charset="utf-8"></script>
 
