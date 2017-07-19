@@ -27,6 +27,8 @@ img {
   cursor: crosshair !important;
 }
 
+/*TOOLS*/
+
 .toolbar {
   position: absolute;
   left: 20px;
@@ -52,4 +54,18 @@ img {
 
 .drag {
   cursor: move;
+}
+
+/*Preview*/
+.preview {
+  height: 10px;
+  width: 10px;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: red;
+  z-index: 999;
+  border-radius: 10px;
+  cursor: crosshair;
 }
