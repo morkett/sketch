@@ -53,6 +53,10 @@
     // lastY = e.offsetY;
     // es6
     [lastX, lastY] = [e.offsetX, e.offsetY];
+
+
+    changeBrushSize();
+    changeBrushOpacity();
     if(changeHue === true) {
       ctx.strokeStyle = `hsla(${hue}, 100%, 50%, ${brushOpacity.value})`;
       hue++;
@@ -67,10 +71,6 @@
       const hsl = rgbToHsl(hex);
       ctx.strokeStyle = `hsla(${hsl[0]},${hsl[1]}%,${hsl[2]}%,${brushOpacity.value})`;
     }
-
-    changeBrushSize();
-    changeBrushOpacity();
-
     // save canvas image as data url (png format by default)
     const dataURL = canvas.toDataURL('image/png');
 
