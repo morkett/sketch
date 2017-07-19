@@ -1,4 +1,3 @@
-
 // TODO: add a selection of BUTTONS
 // TODO: choose to hide buttons with key press
 // TODO:transparency
@@ -33,7 +32,6 @@
   let lastY = 0;
 
   let hue = 0;
-  // let direction = true;
   let changeHue = false;
 
   function draw(e) {
@@ -59,17 +57,15 @@
         hue = 0;
       }
     } else {
-      ctx.strokeStyle = colorPicker.value;
+      const hex = colorPicker.value.replace('#', '');
+      console.log({hex});
+      // transformToRGBA
+      const rgba = hexToRgb(hex);
+      console.log({rgba});
+      const hsl = rgbToHsl(hex);
+      ctx.strokeStyle = `hsla(${hsl[0]},${hsl[1]}%,${hsl[2]}%,.5)`;
+      console.log({hsl});
     }
-    // if(ctx.lineWidth <= 20 || ctx.lineWidth <= 10) {
-    //   direction = !direction;
-    // }
-    //
-    // if(direction) {
-    //   ctx.lineWidth++;
-    // } else {
-    //   ctx.lineWidth--;
-    // }
 
     // save canvas image as data url (png format by default)
     const dataURL = canvas.toDataURL('image/png');
@@ -171,3 +167,42 @@
 //     console.log(body);
 //
 //   });
+
+
+//CONVERT HEX TO RGB TO HSL
+  function hexToRgb(hex) {
+    const bigint = parseInt(hex, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+
+    return r + ',' + g + ',' + b;
+  }
+
+
+  function rgbToHsl(hex){
+
+    const bigint = parseInt(hex, 16);
+    let r = (bigint >> 16) & 255;
+    let g = (bigint >> 8) & 255;
+    let b = bigint & 255;
+
+    r /= 255, g /= 255, b /= 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h, s, l = (max + min) / 2;
+
+    if(max === min){
+      h = s = 0; // achromatic
+    }else{
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch(max){
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+        case g: h = (b - r) / d + 2; break;
+        case b: h = (r - g) / d + 4; break;
+      }
+      h /= 6;
+    }
+
+    return [Math.floor(h * 360), Math.floor(s * 100), Math.floor(l * 100)];
+  }
