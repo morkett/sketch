@@ -1,14 +1,11 @@
-// TODO: ADD RADIO BUTTONS SET TO TRUE/FALSE to turn multi-hue: on/off
+
 // TODO: add a selection of BUTTONS
 // TODO: choose to hide buttons with key press
-// TODO: allow user to choose their own colour
-// TODO: allow user to change thickness of brush
 // TODO:transparency
 // TODO: save image
-// TODO: Style navigator
 
 // TODO: background-colour
-
+// TODO: styles
 // TODO: show preview on brush
 // TODO: email image
 
@@ -17,6 +14,8 @@
   const ctx = canvas.getContext('2d');
 
   const colorPicker = document.querySelector('.colorSelector');
+  const brushSize = document.querySelector('.brushSize');
+  const brushSizePreview = document.querySelector('.brushSizePreview');
 
   //canvas size
   // canvas.width = window.innerWidth;
@@ -25,7 +24,7 @@
   ctx.strokeStyle = '#BADA55';
   ctx.lineJoin = 'round';
   ctx.lineCap = 'round';
-  ctx.lineWidth = '10';
+  ctx.lineWidth = brushSize.value;
   // ctx.globalCompositeOperation = 'multiply';
 
 
@@ -34,12 +33,14 @@
   let lastY = 0;
 
   let hue = 0;
-  let direction = true;
+  // let direction = true;
   let changeHue = false;
 
   function draw(e) {
     if(!isDrawing) return;
-    ctx.lineWidth = 10;
+    // ctx.lineWidth = 10;
+    ctx.lineWidth = brushSize.value;
+
     ctx.beginPath();
     // start from
     ctx.moveTo(lastX, lastY);
@@ -60,15 +61,15 @@
     } else {
       ctx.strokeStyle = colorPicker.value;
     }
-    if(ctx.lineWidth <= 20 || ctx.lineWidth <= 10) {
-      direction = !direction;
-    }
-
-    if(direction) {
-      ctx.lineWidth++;
-    } else {
-      ctx.lineWidth--;
-    }
+    // if(ctx.lineWidth <= 20 || ctx.lineWidth <= 10) {
+    //   direction = !direction;
+    // }
+    //
+    // if(direction) {
+    //   ctx.lineWidth++;
+    // } else {
+    //   ctx.lineWidth--;
+    // }
 
     // save canvas image as data url (png format by default)
     const dataURL = canvas.toDataURL('image/png');
@@ -134,13 +135,23 @@
   }
 
   colorPicker.addEventListener('click', selectColor);
+  colorPicker.addEventListener('mousemove', selectColor);
 
   function selectColor() {
-    console.log('clicked');
     canRain = false;
     activeTool(rainbow, canRain);
     changeHue = false;
-    console.log({changeHue}, {canRain});
+  }
+
+  brushSize.addEventListener('mousemove', changeBrushSize);
+  brushSize.addEventListener('click', changeBrushSize);
+
+  function changeBrushSize() {
+    console.log(brushSize.value);
+    brushSizePreview.style.width = brushSize.value + 'px';
+    brushSizePreview.style.height = brushSize.value + 'px';
+    brushSizePreview.style.borderRadius = brushSize.value + 'px';
+    brushSize.value;
   }
 
 
