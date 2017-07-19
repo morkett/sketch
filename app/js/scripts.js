@@ -79,13 +79,21 @@
     console.log(isDrawing);
     [lastX, lastY] = [e.offsetX, e.offsetY];
   });
-  
+
   canvas.addEventListener('mousemove', draw);
   canvas.addEventListener('mousedown', draw);
   canvas.addEventListener('mouseup', () => isDrawing = false);
   canvas.addEventListener('mouseout', () => isDrawing = false);
 
 // TOOLS
+  function activeTool(tool, can) {
+    if(can) {
+      tool.classList.add('active');
+    } else {
+      tool.classList.remove('active');
+    }
+  }
+
 
   //ERASER
   const eraser = document.querySelector('.eraser');
@@ -94,16 +102,12 @@
   let canErase = false;
 
   function erase() {
-
     canErase = !canErase;
-    console.log(canErase);
+    activeTool(eraser, canErase);
     if (canErase) {
-      eraser.classList.add('active');
       console.log('erase active');
       ctx.globalCompositeOperation='destination-out';
     } else {
-      eraser.classList.remove('active');
-      console.log('erase nont active');
       ctx.globalCompositeOperation='source-over';
     }
   }
