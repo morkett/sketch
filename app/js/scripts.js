@@ -25,6 +25,7 @@
   ctx.lineWidth = '10';
   // ctx.globalCompositeOperation = 'multiply';
 
+
   let isDrawing = false;
   let lastX = 0;
   let lastY = 0;
@@ -82,3 +83,20 @@
   canvas.addEventListener('mousemove', draw);
   canvas.addEventListener('mouseup', () => isDrawing = false);
   canvas.addEventListener('mouseout', () => isDrawing = false);
+
+// TOOLS
+  //ERASER
+
+  const eraser = document.querySelector('.eraser');
+
+  eraser.addEventListener('click', erase);
+
+  function erase() {
+
+    let canErase = false;
+    canErase = !canErase;
+    if (canErase) {
+      console.log('erase active');
+      ctx.globalCompositeOperation='destination-out';
+    }
+  }
