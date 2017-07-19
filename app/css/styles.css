@@ -51,6 +51,8 @@ img {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  /*absolute positioning for drag + remove attribute style on click of x to return to relative and start position*/
+  /*position: absolute;*/
 }
 
 input[type="color"] {
@@ -62,6 +64,19 @@ input[type="color"]::-webkit-color-swatch-wrapper {
 }
 input[type="color"]::-webkit-color-swatch {
 	border: none;
+}
+
+input[type="range"] {
+  width: 200px;
+}
+
+.brushSizePreview {
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  background: #e53935;
+  /*make absolute to stop radius messing up*/
+  /*position: absolute;*/
 }
 
 .active {
