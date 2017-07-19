@@ -15,8 +15,9 @@
 
   const ctx = canvas.getContext('2d');
 
-  canvas.width = window.innerWidth + window.innerWidth;
-  canvas.height = window.innerHeight + window.innerHeight;
+  //canvas size
+  // canvas.width = window.innerWidth;
+  // canvas.height = window.innerHeight;
 
   ctx.strokeStyle = '#BADA55';
   ctx.lineJoin = 'round';
@@ -30,10 +31,10 @@
 
   let hue = 0;
   let direction = true;
-  let changeHue = true;
+  const changeHue = true;
 
   function draw(e) {
-    if(!isDrawing) return //stop the fn from running when they are not pressed down
+    if(!isDrawing) return;
     console.log(e);
     ctx.strokeStyle = `hsla(${hue}, 100%, 50%, 1)`;
     ctx.lineWidth = hue / 10;
@@ -65,11 +66,11 @@
     }
 
     // save canvas image as data url (png format by default)
-     var dataURL = canvas.toDataURL();
+    const dataURL = canvas.toDataURL();
 
      // set canvasImg image src to dataURL
      // so it can be saved as an image
-     document.getElementById('canvasImg').src = dataURL;
+    document.getElementById('canvasImg').src = dataURL;
   }
 
   canvas.addEventListener('mousedown', (e) =>  {
