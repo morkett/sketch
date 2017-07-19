@@ -3,17 +3,20 @@
 // TODO: choose to hide buttons with key press
 // TODO: allow user to choose their own colour
 // TODO: allow user to change thickness of brush
-// TODO: show preview on brush
 // TODO:transparency
-// TODO: erase brush - https://stackoverflow.com/questions/25907163/html5-canvas-eraser-tool-without-overdraw-white-color
 // TODO: save image
-// TODO: Show image nav in corner
-// TODO: email image
+// TODO: Style navigator
+
 // TODO: background-colour
+
+// TODO: show preview on brush
+// TODO: email image
 
   const canvas = document.querySelector('#draw');
 
   const ctx = canvas.getContext('2d');
+
+    const colorPicker = document.querySelector('.colorSelector');
 
   //canvas size
   // canvas.width = window.innerWidth;
@@ -32,13 +35,14 @@
 
   let hue = 0;
   let direction = true;
-  const changeHue = true;
+  const changeHue = false;
 
   function draw(e) {
     if(!isDrawing) return;
     console.log(e);
-    ctx.strokeStyle = `hsla(${hue}, 100%, 50%, 1)`;
-    ctx.lineWidth = hue / 10;
+    // ctx.strokeStyle = `hsla(${hue}, 100%, 50%, 1)`;
+    ctx.strokeStyle = colorPicker.value;
+    ctx.lineWidth = 10;
     ctx.beginPath();
     // start from
 
@@ -67,7 +71,7 @@
     }
 
     // save canvas image as data url (png format by default)
-    const dataURL = canvas.toDataURL();
+    const dataURL = canvas.toDataURL('image/png');
 
      // set canvasImg image src to dataURL
      // so it can be saved as an image
@@ -111,3 +115,23 @@
       ctx.globalCompositeOperation='source-over';
     }
   }
+
+
+
+
+
+
+
+
+// //Preview Move
+//   const body = document.querySelector('body');
+//   const preview = document.querySelector('.preview');
+// // preview.style.right = 100;
+//
+//   body.addEventListener('mousemove', (e) =>  {
+//     preview.style.backgroundColor = `hsla(${hue}, 100%, 50%, 1)`;
+//     preview.style.top = e.clientY + 10 + 'px';
+//     preview.style.left = e.clientX + 10 + 'px';
+//     console.log(body);
+//
+//   });
