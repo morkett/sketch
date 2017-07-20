@@ -11,6 +11,52 @@ body {
   font-family: Helvetica;
 }
 
+header {
+  position: absolute;
+  top: 0;
+  padding: 50px;
+}
+
+h1 {
+  font-family: 'Cabin Sketch', cursive;
+  font-size: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+h1 > span:nth-child(1) {
+  color: #f44336;
+  border-bottom: 4px solid #f44336;
+}
+h1 > span:nth-child(2) {
+  color: #4caf50;
+  border-bottom: 4px solid #4caf50;
+
+}
+h1 > span:nth-child(3) {
+  color: #ffc107;
+  border-bottom: 4px solid #ffc107;
+
+}
+h1 > span:nth-child(4) {
+  color: #2196f3;
+  border-bottom: 4px solid #2196f3;
+
+}
+h1 > span:nth-child(5) {
+  color: #ff5722;
+  border-bottom: 4px solid #ff5722;
+
+}
+h1 > span:nth-child(6) {
+  color: #7b1fa2;
+  border-bottom: 4px solid #7b1fa2;
+
+}
+
+
 .imgNav, .brushPanel {
   height: 180px;
   width: 266.6px;
