@@ -1,5 +1,4 @@
 // TODO: choose to hide buttons with key press
-// TODO:transparency
 // TODO: save image
 // TODO: background-colour
 // TODO: styles
@@ -14,6 +13,10 @@
   const brushSize = document.querySelector('.brushSize');
   const brushSizePreview = document.querySelector('.brushSizePreview');
   const brushOpacity = document.querySelector('.brushOpacity');
+  const brushTool = document.querySelector('.brush');
+  const brushPanel = document.querySelector('.brushPanel');
+  const panelCross = document.querySelector('#panelCross');
+  const bgTool = document.querySelector('.bg');
 
   //canvas size
   // canvas.width = window.innerWidth;
@@ -25,7 +28,7 @@
   ctx.lineWidth = brushSize.value;
   // ctx.globalCompositeOperation = 'multiply';
 
-
+  let isBgTool = false;
   let isDrawing = false;
   let lastX = 0;
   let lastY = 0;
@@ -37,9 +40,10 @@
     if(!isDrawing) {
       changeBrushSize();
       changeBrushOpacity();
-      return;
 
+      return;
     }
+
 
     // ctx.lineWidth = 10;
     ctx.lineWidth = brushSize.value;
@@ -60,7 +64,6 @@
     if(changeHue === true) {
       ctx.strokeStyle = `hsla(${hue}, 100%, 50%, ${brushOpacity.value})`;
       hue++;
-      console.log(ctx.strokeStyle);
       if(hue >= 360) {
         hue = 0;
       }
@@ -81,7 +84,6 @@
 
   canvas.addEventListener('mousedown', (e) =>  {
     isDrawing = true;
-    console.log(isDrawing);
     [lastX, lastY] = [e.offsetX, e.offsetY];
   });
 
@@ -110,7 +112,6 @@
     canErase = !canErase;
     activeTool(eraser, canErase);
     if (canErase) {
-      console.log('erase active');
       ctx.globalCompositeOperation='destination-out';
     } else {
       ctx.globalCompositeOperation='source-over';
@@ -128,9 +129,26 @@
     activeTool(rainbow, canRain);
     if (canRain) {
       changeHue = true;
-      console.log('rainbox active');
     } else {
       changeHue = false;
+    }
+  }
+
+  //brushTool
+  let showBrushPanel = false;
+
+  brushTool.addEventListener('click', showBrush);
+  panelCross.addEventListener('click', showBrush);
+
+
+  function showBrush() {
+    showBrushPanel = !showBrushPanel;
+    activeTool(brushTool, showBrushPanel);
+    activeTool(panelCross, showBrushPanel);
+    if(showBrushPanel) {
+      brushPanel.classList.remove('hide');
+    } else {
+      brushPanel.classList.add('hide');
     }
   }
 
@@ -147,10 +165,9 @@
   brushSize.addEventListener('click', changeBrushSize);
 
   function changeBrushSize() {
-    console.log(brushSize.value);
     brushSizePreview.style.width = brushSize.value + 'px';
     brushSizePreview.style.height = brushSize.value + 'px';
-    brushSizePreview.style.borderRadius = brushSize.value + 'px';
+    // brushSizePreview.style.borderRadius = brushSize.value + 'px';
     const hex = colorPicker.value.replace('#', '');
     const hsl = rgbToHsl(hex);
     ctx.strokeStyle = `hsla(${hsl[0]},${hsl[1]}%,${hsl[2]}%,${brushOpacity.value})`;
@@ -166,6 +183,19 @@
     const hsl = rgbToHsl(hex);
     ctx.strokeStyle = `hsla(${hsl[0]},${hsl[1]}%,${hsl[2]}%,${brushOpacity.value})`;
     changeBrushSize();
+  }
+
+//BG TOOL
+  bgTool.addEventListener('click', bgToolOn);
+  function bgToolOn() {
+    isBgTool = !isBgTool;
+    if(isBgTool) {
+      bgTool.classList.add('active');
+      canvas.style.background = colorPicker.value;
+      setTimeout(function () {
+        bgTool.classList.remove('active');
+      }, 250);
+    }
   }
 
 
