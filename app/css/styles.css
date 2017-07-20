@@ -10,21 +10,43 @@ body {
   background:rgb(98,98,98);
 }
 
-img {
-  position: absolute;
-  border: 5px solid black;
+.imgNav, .brushPanel {
+  height: 180px;
+  width: 266.6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #535353;
   top: 0;
   left: 0;
-  width: 150px;
-  height: 150px;
+  position: absolute;
+
+  /*border-radius: 5px;*/
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.brushPanel .toolTitle {
+
+}
+
+
+img {
+  border: 2px solid #434343;
+  width: 250px;
+  height: 133.33px;
   display: block;
   background: #fff;
+  border-radius: 5px;
 }
 
 #draw {
   /*border: 1px dashed black;*/
   background: #fff;
   cursor: crosshair !important;
+  /*transform: scale(2);*/
 }
 
 /*TOOLS*/
@@ -33,37 +55,80 @@ img {
   position: absolute;
   left: 20px;
   top: 200px;
-  border: 1px solid black;
-  height: 253px;
-  width: 104px;
+  /*border: 1px solid black;*/
+  height: auto;
+  width: 50px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  background: #535353;
+  /*border-radius: 5px;*/
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.toolTitle, .imgNavTitle {
+  background: #434343;
+  height: 20px;
+  width: 100%;
+  border-radius: inherit;
+  color: #dcdcdc;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 5px;
+  font-size: 10px;
+}
+
+.imgNavTitle, .panelTitle {
+  transform: translateY(-15px);
+}
+
+.panelTitle {
+  width: calc(100% + 150px);
+  z-index: 500;
+  margin-left: 150px;
 }
 
 .tool {
-  height: 50px;
+  height: 45px;
   width: 50px;
-  border: 1px solid black;
+  border: 1px solid transparent;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  background: #535353;
+  color: #dcdcdc;
+  border-radius: 5px;
+
   /*absolute positioning for drag + remove attribute style on click of x to return to relative and start position*/
   /*position: absolute;*/
 }
 
+label {
+  color: #dcdcdc;
+}
 input[type="color"] {
 	-webkit-appearance: none;
   background: transparent;
+  /*position: absolute;
+  bottom: 2px;
+  left: 27px;*/
+  border-radius: 5px;
+
 }
+
+
 input[type="color"]::-webkit-color-swatch-wrapper {
 	padding: 2px 1px;
 }
 input[type="color"]::-webkit-color-swatch {
 	border: none;
+  border-radius: 5px;
+  border: 2px solid #383838;
 }
 
 input[type="range"] {
@@ -73,17 +138,44 @@ input[type="range"] {
 .brushSizePreview {
   width: 10px;
   height: 10px;
-  border-radius: 10px;
+  border-radius: 50%;
   background: #e53935;
   display: block;
+
   /*make absolute to stop radius messing up*/
   /*position: absolute;*/
 }
 
-.active {
-  border-color: red;
+.brushSizePreviewCont {
+  position: absolute;
+  transform: translateX(209px);
+  background: inherit;
+  width: 150px;
+  height: 100%;
+  bottom: 0;
+  border-top-right-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /*border-left: 2px solid red;*/
 }
 
+
+
+.active {
+  background: #383838;
+  border-color: #636363;
+}
+
+.hide {
+  display: none;
+}
+.cross {
+  cursor: pointer;
+  background: none;
+}
 .drag {
   cursor: move;
 }
