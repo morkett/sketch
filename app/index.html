@@ -20,18 +20,18 @@
   ondragstart="dragStart(event)"
   src="images/bg.png"
   id="imgNav">
-  <div class="imgNavTitle">&#x2715;</div>
-    <img id="canvasImg" draggable="false" src=''/>
-    <img id="canvasBgImg" draggable="false" src=''/>
+  <div class="imgNavTitle"><span class="cross" id="imgNavCross">&#x2715;</span></div>
+    <img id="canvasImg" draggable="false" />
+    <img id="canvasBgImg" draggable="false" />
 </div>
 <div class="brushPanel hide"
       id="brushPanel">
   <div class="toolTitle panelTitle"><span class="cross" id="panelCross">&#x2715;</span></div>
-  <label for="brushSize"> Size</label>
+  <label for="brushSize" class="sizeLabel"> Size</label>
   <div class="brushSizePreviewCont">
     <label for="brushSize" class="brushSizePreview"></label>
   </div>
-  <input type="range" class="tool brushSize" id="brushSize" value="10" min="1" max="100">
+  <input type="range" class="tool brushSize" id="brushSize" value="10" min="1" max="80">
 
   <label for="brushOpacity">Opacity</label>
   <input type="range" class="tool brushOpacity"  value="1" min="0.1" max="1" step=".1" id="brushOpacity">
@@ -41,13 +41,14 @@
     draggable="true"
     ondragstart="dragStart(event)">
     <div class="toolTitle">&#x2715;</div>
-    <div class="tool eraser" id="eraserTool">E</div>
-    <div class="tool rainbow">RN</div>
-    <div class="tool brush">B</div>
-    <div class="tool bg">BG</div>
-    <div class="tool save">S</div>
-    <div class="tool dl"><a id="download">D</a></div>
-    <div class="tool clear">C</div>
+    <div class="tool brush"></div>
+    <div class="tool rainbow"></div>
+    <div class="tool bg"></div>
+    <div class="tool eraser" id="eraserTool"></div>
+    <div class="tool nav active"></div>
+    <div class="tool save"></div>
+    <div class="tool clear"></div>
+    <div class="tool dl"><a id="download"></a></div>
     <input type="color" class="tool colorSelector" value="#e53935">
 
   </div>
