@@ -1,6 +1,5 @@
 // TODO: choose to hide buttons with key press
 // TODO: save image
-// TODO: background-colour
 // TODO: styles
 // TODO: show preview on brush
 // TODO: email image
@@ -18,19 +17,26 @@
   const panelCross = document.querySelector('#panelCross');
   const bgTool = document.querySelector('.bg');
   const clearTool = document.querySelector('.clear');
+  const saveTool = document.querySelector('.save');
 
-  clearTool.addEventListener('click', clearCanvas);
-  function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const dataURL = canvas.toDataURL('image/png');
 
-     // set canvasImg image src to dataURL
-     // so it can be saved as an image
+  function loadCanvas(){
+    var dataURL = localStorage.getItem('canvas');
+    var img = new Image;
+    img.src = dataURL;
+    img.onload = function () {
+      ctx.drawImage(img, 0, 0);
+    };
     document.getElementById('canvasImg').src = dataURL;
   }
+
+  loadCanvas();
+
   //canvas size
   // canvas.width = window.innerWidth;
   // canvas.height = window.innerHeight;
+  canvas.width = 800;
+  canvas.height = 450;
 
   ctx.strokeStyle = '#BADA55';
   ctx.lineJoin = 'round';
@@ -90,6 +96,7 @@
      // set canvasImg image src to dataURL
      // so it can be saved as an image
     document.getElementById('canvasImg').src = dataURL;
+
   }
 
   canvas.addEventListener('mousedown', (e) =>  {
@@ -201,13 +208,47 @@
     isBgTool = !isBgTool;
     if(isBgTool) {
       bgTool.classList.add('active');
-      canvas.style.background = colorPicker.value;
+      ctx.rect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle = colorPicker.value;
+      ctx.fill();
       setTimeout(function () {
         bgTool.classList.remove('active');
       }, 250);
     }
   }
 
+// CLEAR TOOL
+
+  let isClearTool = false;
+  clearTool.addEventListener('click', clearCanvas);
+  function clearCanvas() {
+    isClearTool = !isClearTool;
+    if(isClearTool) {
+      clearTool.classList.add('active');
+      setTimeout(function () {
+        clearTool.classList.remove('active');
+      }, 250);
+    }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const dataURL = canvas.toDataURL('image/png');
+
+    document.getElementById('canvasImg').src = dataURL;
+  }
+
+// SAVE TOOL
+
+  let isSaveTool = false;
+  saveTool.addEventListener('click', saveCanvas);
+  isSaveTool = !isSaveTool;
+  if(isSaveTool) {
+    saveTool.classList.add('active');
+    setTimeout(function () {
+      saveTool.classList.remove('active');
+    }, 250);
+  }
+  function saveCanvas() {
+    localStorage.setItem('canvas', canvas.toDataURL());
+  }
 
 //CONVERT COLOURS
 
