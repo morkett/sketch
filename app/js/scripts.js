@@ -17,7 +17,17 @@
   const brushPanel = document.querySelector('.brushPanel');
   const panelCross = document.querySelector('#panelCross');
   const bgTool = document.querySelector('.bg');
+  const clearTool = document.querySelector('.clear');
 
+  clearTool.addEventListener('click', clearCanvas);
+  function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const dataURL = canvas.toDataURL('image/png');
+
+     // set canvasImg image src to dataURL
+     // so it can be saved as an image
+    document.getElementById('canvasImg').src = dataURL;
+  }
   //canvas size
   // canvas.width = window.innerWidth;
   // canvas.height = window.innerHeight;
