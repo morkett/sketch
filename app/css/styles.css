@@ -18,35 +18,56 @@ body {
   justify-content: center;
   align-items: center;
   background: #535353;
-  top: 0;
-  left: 0;
+  top: 15px;
+  right: 15px;
   position: absolute;
 
   /*border-radius: 5px;*/
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  z-index: 999;
+
 }
 
-.brushPanel .toolTitle {
 
+.brushPanel {
+  left: 15px;
+  right: auto;
 }
 
 
 img {
-  border: 2px solid #434343;
+  /*border: 2px solid #434343;*/
   width: 250px;
   height: 133.33px;
   display: block;
-  background: #fff;
+  /*background: rgba(12,12,12,.5);*/
   border-radius: 5px;
 }
 
-#draw {
-  /*border: 1px dashed black;*/
+#canvasImg {
+  z-index: 200;
+}
+
+#canvasBgImg {
   background: #fff;
+  background: url('../images/canvasBg.png') center center;
+  background-size: 15px;
+  background-position: -1.5px top ;
+  position: absolute;
+  top: 33.2px;
+}
+
+#draw {
   cursor: crosshair !important;
   /*transform: scale(2);*/
+  z-index: 200;
+}
+#canvasBg {
+  background: url('../images/canvasBg.png') center center;
+  background-size: 50px;
+  position: absolute;
 }
 
 /*TOOLS*/
@@ -68,6 +89,7 @@ img {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  z-index: 999;
 }
 .toolTitle, .imgNavTitle {
   background: #434343;
