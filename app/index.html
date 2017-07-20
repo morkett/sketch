@@ -41,15 +41,15 @@
     draggable="true"
     ondragstart="dragStart(event)">
     <div class="toolTitle">&#x2715;</div>
-    <div class="tool brush"></div>
-    <div class="tool rainbow"></div>
-    <div class="tool bg"></div>
-    <div class="tool eraser" id="eraserTool"></div>
-    <div class="tool nav active"></div>
-    <div class="tool save"></div>
-    <div class="tool clear"></div>
-    <div class="tool dl"><a id="download"></a></div>
-    <input type="color" class="tool colorSelector" value="#e53935">
+    <div class="tool brush" data-tool-tip="Brush Size &amp; Opacity"></div>
+    <div class="tool rainbow" data-tool-tip="Rainbow Brush Tool"></div>
+    <div class="tool bg" data-tool-tip="Change Background Colour"></div>
+    <div class="tool eraser" id="eraserTool" data-tool-tip="Eraser Tool"></div>
+    <div class="tool nav active" data-tool-tip="Navigator Hide/Show"></div>
+    <div class="tool save" data-tool-tip="Save Canvas"></div>
+    <div class="tool clear" data-tool-tip="Clear Canvas"></div>
+    <div class="tool dl" data-tool-tip="Download As PNG"><a id="download" ></a></div>
+    <input type="color" class="tool colorSelector" value="#e53935" data-tool-tip="Select Colour">
 
   </div>
   <script src="js/scripts.js" charset="utf-8"></script>
