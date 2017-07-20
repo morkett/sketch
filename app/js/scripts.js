@@ -1,13 +1,13 @@
-// TODO: choose to hide buttons with key press
-// TODO: save image
-// TODO: background-colour
+// TODO: buttons with key press
 // TODO: styles
+// TODO:merge 2 canvas and dl both - https://stackoverflow.com/questions/29551841/merge-multiple-canvases-and-download-as-image
 // TODO: show preview on brush
-// TODO: email image
 
   const canvas = document.querySelector('#draw');
+  const canvasBg = document.querySelector('#canvasBg');
 
   const ctx = canvas.getContext('2d');
+  const ctxBg = canvasBg.getContext('2d');
 
   const colorPicker = document.querySelector('.colorSelector');
   const brushSize = document.querySelector('.brushSize');
@@ -15,12 +15,43 @@
   const brushOpacity = document.querySelector('.brushOpacity');
   const brushTool = document.querySelector('.brush');
   const brushPanel = document.querySelector('.brushPanel');
+  const navPanel = document.querySelector('.imgNav');
   const panelCross = document.querySelector('#panelCross');
+  const navCross = document.querySelector('#imgNavCross');
   const bgTool = document.querySelector('.bg');
+  const navTool = document.querySelector('.nav');
+  const clearTool = document.querySelector('.clear');
+  const saveTool = document.querySelector('.save');
+  const dlToolLink = document.querySelector('#download');
+
+  function loadCanvas(){
+    var dataURL = localStorage.getItem('canvas');
+    var img = new Image;
+    img.src = dataURL;
+    img.onload = function () {
+      ctx.drawImage(img, 0, 0);
+    };
+    document.getElementById('canvasImg').src = dataURL;
+  }
+  function loadCanvasBg(){
+    var dataURL = localStorage.getItem('canvasBg');
+    var img = new Image;
+    img.src = dataURL;
+    img.onload = function () {
+      ctxBg.drawImage(img, 0, 0);
+    };
+    document.getElementById('canvasBgImg').src = dataURL;
+  }
+
+  loadCanvasBg();
+
+  loadCanvas();
 
   //canvas size
   // canvas.width = window.innerWidth;
   // canvas.height = window.innerHeight;
+  canvas.width = 800;
+  canvas.height = 450;
 
   ctx.strokeStyle = '#BADA55';
   ctx.lineJoin = 'round';
@@ -44,7 +75,6 @@
       return;
     }
 
-
     // ctx.lineWidth = 10;
     ctx.lineWidth = brushSize.value;
     ctx.beginPath();
@@ -57,7 +87,6 @@
     // lastY = e.offsetY;
     // es6
     [lastX, lastY] = [e.offsetX, e.offsetY];
-
 
     changeBrushSize();
     changeBrushOpacity();
@@ -76,10 +105,14 @@
     }
     // save canvas image as data url (png format by default)
     const dataURL = canvas.toDataURL('image/png');
+    const dataURLbg = canvasBg.toDataURL('image/png');
 
      // set canvasImg image src to dataURL
      // so it can be saved as an image
     document.getElementById('canvasImg').src = dataURL;
+    document.getElementById('canvasBgImg').src = dataURLbg;
+
+
   }
 
   canvas.addEventListener('mousedown', (e) =>  {
@@ -140,7 +173,6 @@
   brushTool.addEventListener('click', showBrush);
   panelCross.addEventListener('click', showBrush);
 
-
   function showBrush() {
     showBrushPanel = !showBrushPanel;
     activeTool(brushTool, showBrushPanel);
@@ -151,6 +183,21 @@
       brushPanel.classList.add('hide');
     }
   }
+
+  navCross.addEventListener('click', showNav);
+  navTool.addEventListener('click', showNav);
+  let showNavPanel = true;
+
+  function showNav() {
+    showNavPanel = !showNavPanel;
+    activeTool(navTool, showNavPanel);
+    if(!showNavPanel) {
+      navPanel.classList.add('hide');
+    } else {
+      navPanel.classList.remove('hide');
+    }
+  }
+
 
   colorPicker.addEventListener('click', selectColor);
   colorPicker.addEventListener('mousemove', selectColor);
@@ -191,13 +238,75 @@
     isBgTool = !isBgTool;
     if(isBgTool) {
       bgTool.classList.add('active');
-      canvas.style.background = colorPicker.value;
+      ctxBg.rect(0,0,canvas.width,canvas.height);
+      ctxBg.fillStyle = colorPicker.value;
+      ctxBg.fill();
+
+      const dataURLbg = canvasBg.toDataURL('image/png');
+      document.getElementById('canvasBgImg').src = dataURLbg;
+      // ctx.globalCompositeOperation='source-over';
       setTimeout(function () {
         bgTool.classList.remove('active');
       }, 250);
     }
   }
 
+// CLEAR TOOL
+
+  let isClearTool = false;
+  clearTool.addEventListener('click', clearCanvas);
+  function clearCanvas() {
+    isClearTool = !isClearTool;
+    if(isClearTool) {
+      clearTool.classList.add('active');
+      setTimeout(function () {
+        clearTool.classList.remove('active');
+      }, 250);
+    }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctxBg.clearRect(0, 0, canvas.width, canvas.height);
+    const dataURL = canvas.toDataURL('image/png');
+    const dataURLbg = canvasBg.toDataURL('image/png');
+
+    document.getElementById('canvasImg').src = dataURL;
+    document.getElementById('canvasBgImg').src = dataURLbg;
+  }
+
+// SAVE TOOL
+
+  let isSaveTool = false;
+  saveTool.addEventListener('click', saveCanvas);
+
+  function saveCanvas() {
+    localStorage.setItem('canvas', canvas.toDataURL());
+    localStorage.setItem('canvasBg', canvasBg.toDataURL());
+    isSaveTool = !isSaveTool;
+    if(isSaveTool) {
+      saveTool.classList.add('active');
+      setTimeout(function () {
+        saveTool.classList.remove('active');
+      }, 250);
+    }
+  }
+
+  //DOWNLOAD TOOL
+  let isDlTool = false;
+  function downloadCanvas(link, canvasId, filename) {
+    link.href = document.getElementById(canvasId).toDataURL();
+    link.download = filename;
+  }
+
+  const dlTool = document.querySelector('.dl');
+  dlToolLink.addEventListener('click', function() {
+    isDlTool = !isDlTool;
+    if(isDlTool) {
+      dlTool.classList.add('active');
+      setTimeout(function () {
+        dlTool.classList.remove('active');
+      }, 250);
+    }
+    downloadCanvas(this, 'draw', 'test.png');
+  }, false);
 
 //CONVERT COLOURS
 
