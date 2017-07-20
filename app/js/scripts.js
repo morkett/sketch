@@ -15,8 +15,11 @@
   const brushOpacity = document.querySelector('.brushOpacity');
   const brushTool = document.querySelector('.brush');
   const brushPanel = document.querySelector('.brushPanel');
+  const navPanel = document.querySelector('.imgNav');
   const panelCross = document.querySelector('#panelCross');
+  const navCross = document.querySelector('#imgNavCross');
   const bgTool = document.querySelector('.bg');
+  const navTool = document.querySelector('.nav');
   const clearTool = document.querySelector('.clear');
   const saveTool = document.querySelector('.save');
   const dlToolLink = document.querySelector('#download');
@@ -170,7 +173,6 @@
   brushTool.addEventListener('click', showBrush);
   panelCross.addEventListener('click', showBrush);
 
-
   function showBrush() {
     showBrushPanel = !showBrushPanel;
     activeTool(brushTool, showBrushPanel);
@@ -181,6 +183,21 @@
       brushPanel.classList.add('hide');
     }
   }
+
+  navCross.addEventListener('click', showNav);
+  navTool.addEventListener('click', showNav);
+  let showNavPanel = true;
+
+  function showNav() {
+    showNavPanel = !showNavPanel;
+    activeTool(navTool, showNavPanel);
+    if(!showNavPanel) {
+      navPanel.classList.add('hide');
+    } else {
+      navPanel.classList.remove('hide');
+    }
+  }
+
 
   colorPicker.addEventListener('click', selectColor);
   colorPicker.addEventListener('mousemove', selectColor);
