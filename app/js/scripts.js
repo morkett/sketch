@@ -1,12 +1,13 @@
-// TODO: choose to hide buttons with key press
-// TODO: save image
+// TODO: buttons with key press
 // TODO: styles
+// TODO:merge 2 canvas and dl both - https://stackoverflow.com/questions/29551841/merge-multiple-canvases-and-download-as-image
 // TODO: show preview on brush
-// TODO: email image
 
   const canvas = document.querySelector('#draw');
+  const canvasBg = document.querySelector('#canvasBg');
 
   const ctx = canvas.getContext('2d');
+  const ctxBg = canvasBg.getContext('2d');
 
   const colorPicker = document.querySelector('.colorSelector');
   const brushSize = document.querySelector('.brushSize');
@@ -18,7 +19,7 @@
   const bgTool = document.querySelector('.bg');
   const clearTool = document.querySelector('.clear');
   const saveTool = document.querySelector('.save');
-
+  const dlToolLink = document.querySelector('#download');
 
   function loadCanvas(){
     var dataURL = localStorage.getItem('canvas');
@@ -29,6 +30,17 @@
     };
     document.getElementById('canvasImg').src = dataURL;
   }
+  function loadCanvasBg(){
+    var dataURL = localStorage.getItem('canvasBg');
+    var img = new Image;
+    img.src = dataURL;
+    img.onload = function () {
+      ctxBg.drawImage(img, 0, 0);
+    };
+    document.getElementById('canvasBgImg').src = dataURL;
+  }
+
+  loadCanvasBg();
 
   loadCanvas();
 
@@ -60,7 +72,6 @@
       return;
     }
 
-
     // ctx.lineWidth = 10;
     ctx.lineWidth = brushSize.value;
     ctx.beginPath();
@@ -73,7 +84,6 @@
     // lastY = e.offsetY;
     // es6
     [lastX, lastY] = [e.offsetX, e.offsetY];
-
 
     changeBrushSize();
     changeBrushOpacity();
@@ -92,10 +102,13 @@
     }
     // save canvas image as data url (png format by default)
     const dataURL = canvas.toDataURL('image/png');
+    const dataURLbg = canvasBg.toDataURL('image/png');
 
      // set canvasImg image src to dataURL
      // so it can be saved as an image
     document.getElementById('canvasImg').src = dataURL;
+    document.getElementById('canvasBgImg').src = dataURLbg;
+
 
   }
 
@@ -208,9 +221,13 @@
     isBgTool = !isBgTool;
     if(isBgTool) {
       bgTool.classList.add('active');
-      ctx.rect(0,0,canvas.width,canvas.height);
-      ctx.fillStyle = colorPicker.value;
-      ctx.fill();
+      ctxBg.rect(0,0,canvas.width,canvas.height);
+      ctxBg.fillStyle = colorPicker.value;
+      ctxBg.fill();
+
+      const dataURLbg = canvasBg.toDataURL('image/png');
+      document.getElementById('canvasBgImg').src = dataURLbg;
+      // ctx.globalCompositeOperation='source-over';
       setTimeout(function () {
         bgTool.classList.remove('active');
       }, 250);
@@ -230,25 +247,49 @@
       }, 250);
     }
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctxBg.clearRect(0, 0, canvas.width, canvas.height);
     const dataURL = canvas.toDataURL('image/png');
+    const dataURLbg = canvasBg.toDataURL('image/png');
 
     document.getElementById('canvasImg').src = dataURL;
+    document.getElementById('canvasBgImg').src = dataURLbg;
   }
 
 // SAVE TOOL
 
   let isSaveTool = false;
   saveTool.addEventListener('click', saveCanvas);
-  isSaveTool = !isSaveTool;
-  if(isSaveTool) {
-    saveTool.classList.add('active');
-    setTimeout(function () {
-      saveTool.classList.remove('active');
-    }, 250);
-  }
+
   function saveCanvas() {
     localStorage.setItem('canvas', canvas.toDataURL());
+    localStorage.setItem('canvasBg', canvasBg.toDataURL());
+    isSaveTool = !isSaveTool;
+    if(isSaveTool) {
+      saveTool.classList.add('active');
+      setTimeout(function () {
+        saveTool.classList.remove('active');
+      }, 250);
+    }
   }
+
+  //DOWNLOAD TOOL
+  let isDlTool = false;
+  function downloadCanvas(link, canvasId, filename) {
+    link.href = document.getElementById(canvasId).toDataURL();
+    link.download = filename;
+  }
+
+  const dlTool = document.querySelector('.dl');
+  dlToolLink.addEventListener('click', function() {
+    isDlTool = !isDlTool;
+    if(isDlTool) {
+      dlTool.classList.add('active');
+      setTimeout(function () {
+        dlTool.classList.remove('active');
+      }, 250);
+    }
+    downloadCanvas(this, 'draw', 'test.png');
+  }, false);
 
 //CONVERT COLOURS
 
