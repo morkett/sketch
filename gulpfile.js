@@ -4,22 +4,17 @@ var sass = require('gulp-sass');
 
 var autoprefixer = require('gulp-autoprefixer');
 
-var babel = require('gulp-babel');
-
 gulp.task('sass', function() {
-  return gulp.src('app/scss/**/*.scss')
+  return gulp.src('app/scss/**/*.scss') // Gets all files ending with .scss in app/scss
     .pipe(sass())
     .pipe(autoprefixer({browsers: ['last 3 versions']}))
-    .pipe(gulp.dest('app/css'));
+    .pipe(gulp.dest('app/css'))
+    .pipe(browserSync.reload({
+      stream: true
+    }));
 });
 
-gulp.task('babel', () => {
-  return gulp.src('app/js/**/*.js')
-        .pipe(babel({
-          presets: ['es2015']
-        }))
-        .pipe(gulp.dest('dist'));
-});
+
 
 var browserSync = require('browser-sync').create();
 
@@ -31,7 +26,7 @@ gulp.task('browserSync', function() {
   });
 });
 
-gulp.task('watch', ['browserSync','sass'], function (){
+gulp.task('watch', ['browserSync', 'sass'], function (){
   gulp.watch('app/scss/**/*.scss', ['sass']);
   // reload browser when HTML or JS files changed
   gulp.watch('app/**/*html', browserSync.reload);
@@ -42,6 +37,15 @@ var useref = require('gulp-useref');
 var cssnano = require('gulp-cssnano');
 var uglify = require('gulp-uglify');
 var gulpIf = require('gulp-if');
+var babel = require('gulp-babel');
+
+gulp.task('babel', () => {
+  return gulp.src('app/js/**/*.js')
+        .pipe(babel({
+          presets: ['es2015']
+        }))
+        .pipe(gulp.dest('dist'));
+});
 
 gulp.task('useref', function(){
   return gulp.src('app/*.html')
@@ -76,7 +80,7 @@ gulp.task('cache:clear', function (callback) {
 });
 
 gulp.task('default', function (callback) {
-  runSequence(['sass', 'browserSync','watch'],
+  runSequence(['sass','browserSync', 'watch'],
     callback
   );
 });
