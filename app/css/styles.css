@@ -108,6 +108,16 @@ img {
   /*position: absolute;*/
 }
 
+a#download, a#download:hover, a#download:active, a#download:visited {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #dcdcdc;
+    text-decoration: none;
+}
+
 label {
   color: #dcdcdc;
 }
