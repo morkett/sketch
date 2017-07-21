@@ -1,8 +1,3 @@
-// TODO: buttons with key press
-// TODO: styles
-// TODO:merge 2 canvas and dl both - https://stackoverflow.com/questions/29551841/merge-multiple-canvases-and-download-as-image
-// TODO: show preview on brush
-
   const canvas = document.querySelector('#draw');
   const canvasBg = document.querySelector('#canvasBg');
 
@@ -30,8 +25,8 @@
   const dlToolLink = document.querySelector('#download');
 
   function loadCanvas(){
-    let dataURL = localStorage.getItem('canvas');
-    let img = new Image;
+    const dataURL = localStorage.getItem('canvas');
+    const img = new Image;
     img.src = dataURL;
     img.onload = function () {
       ctx.drawImage(img, 0, 0);
@@ -39,8 +34,8 @@
     document.getElementById('canvasImg').src = dataURL;
   }
   function loadCanvasBg(){
-    let dataURL = localStorage.getItem('canvasBg');
-    let img = new Image;
+    const dataURL = localStorage.getItem('canvasBg');
+    const img = new Image;
     img.src = dataURL;
     img.onload = function () {
       ctxBg.drawImage(img, 0, 0);
@@ -411,19 +406,3 @@
   function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-
-
-
-
-  // //Preview Move
-  //   const body = document.querySelector('body');
-  //   const preview = document.querySelector('.preview');
-  // // preview.style.right = 100;
-  //
-  //   body.addEventListener('mousemove', (e) =>  {
-  //     preview.style.backgroundColor = `hsla(${hue}, 100%, 50%, 1)`;
-  //     preview.style.top = e.clientY + 10 + 'px';
-  //     preview.style.left = e.clientX + 10 + 'px';
-  //     console.log(body);
-  //
-  //   });
