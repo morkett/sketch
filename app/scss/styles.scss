@@ -112,6 +112,10 @@ img {
   background-position: -1.5px top ;
   position: absolute;
   top: 33.2px;
+  top: 33.2px;
+  top: calc(50% + 10px);
+  left: 50%;
+  transform: translatex(-50%) translatey(-50%);
 }
 
 #draw {
@@ -120,9 +124,13 @@ img {
   z-index: 200;
 }
 #canvasBg {
+  top: 50%;
+  left: 50%;
+  transform: translatex(-50%) translatey(-50%);
   background: url('../images/canvasBg.png') center center;
   background-size: 50px;
   position: absolute;
+  z-index: -1;
 }
 
 /*TOOLS*/
@@ -342,7 +350,9 @@ input[type="range"] {
 
 .brushSizePreviewCont {
   position: absolute;
-  transform: translateX(183px);
+  top:0;
+  right: 0;
+  transform: translateX(100px);
   background: inherit;
   width: 100px;
   height: 100%;
