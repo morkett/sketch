@@ -61,7 +61,7 @@ h1 > span:nth-child(6) {
 }
 
 
-.imgNav, .brushPanel {
+.imgNav, .brushPanel, .sprayPanel {
   height: 180px;
   width: 266.6px;
   display: flex;
@@ -82,7 +82,7 @@ h1 > span:nth-child(6) {
 }
 
 
-.brushPanel {
+.brushPanel, .sprayPanel {
   left: 15px;
   right: auto;
   height: 100px;
@@ -167,11 +167,11 @@ img {
   width: 52px;
 }
 
-.imgNavTitle, .panelTitle {
+.imgNavTitle, .panelTitle, .sprayPaneTitle {
   transform: translateY(-15px);
 }
 
-.panelTitle {
+.panelTitle, .sprayPaneTitle {
   transform: translateY(-8px);
   width: calc(100% + 100px);
   z-index: 500;
@@ -179,6 +179,11 @@ img {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   height: 20px;
+}
+
+.sprayPaneTitle {
+  width: 100%;
+  margin-left: 0;
 }
 
 .tool {
@@ -249,7 +254,7 @@ img {
   }
 }
 
-.brush, .eraser, .bg, .clear, .save , .rainbow, .nav, #download{
+.brush, .eraser, .bg, .clear, .save , .rainbow, .nav, .spray,  #download{
   background-image: url('../images/paintBrush.svg');
   background-position: center;
   background-repeat: no-repeat;
@@ -271,6 +276,9 @@ img {
 }
 .nav {
   background-image: url('../images/nav.svg');
+}
+.spray {
+  background-image: url('../images/spraycan.svg');
 }
 #download {
   background-image: url('../images/download.svg');
