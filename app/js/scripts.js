@@ -170,8 +170,6 @@
       activeTool(sprayTool, canSpray);
       sprayPanel.classList.add('hide');
       brushPanel.classList.remove('hide');
-      console.log(brushPanel);
-
       ctx.globalCompositeOperation='destination-out';
     } else {
       ctx.globalCompositeOperation='source-over';
