@@ -18,15 +18,20 @@
   const navPanel = document.querySelector('.imgNav');
   const panelCross = document.querySelector('#panelCross');
   const navCross = document.querySelector('#imgNavCross');
+  const sprayCross = document.querySelector('#sprayPanelCross');
   const bgTool = document.querySelector('.bg');
   const navTool = document.querySelector('.nav');
   const clearTool = document.querySelector('.clear');
   const saveTool = document.querySelector('.save');
+  const sprayTool = document.querySelector('.spray');
+  const sprayDensity = document.querySelector('.sprayDensity');
+  const sprayRadius = document.querySelector('.sprayRadius');
+  const sprayPanel = document.querySelector('.sprayPanel');
   const dlToolLink = document.querySelector('#download');
 
   function loadCanvas(){
-    var dataURL = localStorage.getItem('canvas');
-    var img = new Image;
+    let dataURL = localStorage.getItem('canvas');
+    let img = new Image;
     img.src = dataURL;
     img.onload = function () {
       ctx.drawImage(img, 0, 0);
@@ -34,8 +39,8 @@
     document.getElementById('canvasImg').src = dataURL;
   }
   function loadCanvasBg(){
-    var dataURL = localStorage.getItem('canvasBg');
-    var img = new Image;
+    let dataURL = localStorage.getItem('canvasBg');
+    let img = new Image;
     img.src = dataURL;
     img.onload = function () {
       ctxBg.drawImage(img, 0, 0);
@@ -66,16 +71,31 @@
 
   let hue = 0;
   let changeHue = false;
-
+  let density = sprayDensity.value;
+  let radius = sprayRadius.value;
   function draw(e) {
+
     if(!isDrawing) {
       changeBrushSize();
       changeBrushOpacity();
-
       return;
     }
+    //blur
+    // ctx.shadowColor = colorPicker.value;
+    // ctx.shadowBlur = 5;
 
-    // ctx.lineWidth = 10;
+    //spray draw
+    if (canSpray) {
+      for (let i = density; i--; ) {
+
+        ctx.strokeStyle = 'transparent';
+        ctx.fillStyle = colorPicker.value;
+        const offsetX = getRandomInt(-radius, radius);
+        const offsetY = getRandomInt(-radius, radius);
+        ctx.fillRect(lastX + offsetX, lastY + offsetY, 1, 1);
+      }
+    }
+
     ctx.lineWidth = brushSize.value;
     ctx.beginPath();
     // start from
@@ -87,6 +107,8 @@
     // lastY = e.offsetY;
     // es6
     [lastX, lastY] = [e.offsetX, e.offsetY];
+
+
 
     changeBrushSize();
     changeBrushOpacity();
@@ -103,6 +125,9 @@
       const hsl = rgbToHsl(hex);
       ctx.strokeStyle = `hsla(${hsl[0]},${hsl[1]}%,${hsl[2]}%,${brushOpacity.value})`;
     }
+
+
+
     // save canvas image as data url (png format by default)
     const dataURL = canvas.toDataURL('image/png');
     const dataURLbg = canvasBg.toDataURL('image/png');
@@ -111,6 +136,7 @@
      // so it can be saved as an image
     document.getElementById('canvasImg').src = dataURL;
     document.getElementById('canvasBgImg').src = dataURLbg;
+
 
 
   }
@@ -145,6 +171,12 @@
     canErase = !canErase;
     activeTool(eraser, canErase);
     if (canErase) {
+      canSpray = false;
+      activeTool(sprayTool, canSpray);
+      sprayPanel.classList.add('hide');
+      brushPanel.classList.remove('hide');
+      console.log(brushPanel);
+
       ctx.globalCompositeOperation='destination-out';
     } else {
       ctx.globalCompositeOperation='source-over';
@@ -161,6 +193,8 @@
     canRain = !canRain;
     activeTool(rainbow, canRain);
     if (canRain) {
+      canSpray = false;
+      activeTool(sprayTool, canSpray);
       changeHue = true;
     } else {
       changeHue = false;
@@ -178,6 +212,9 @@
     activeTool(brushTool, showBrushPanel);
     activeTool(panelCross, showBrushPanel);
     if(showBrushPanel) {
+      canSpray = false;
+      activeTool(sprayTool, canSpray);
+      sprayPanel.classList.add('hide');
       brushPanel.classList.remove('hide');
     } else {
       brushPanel.classList.add('hide');
@@ -249,6 +286,38 @@
         bgTool.classList.remove('active');
       }, 250);
     }
+  }
+
+// SPRAY TOOL
+  sprayTool.addEventListener('click', sprayOn);
+  sprayCross.addEventListener('click', sprayOn);
+
+
+  let canSpray = false;
+
+  function sprayOn() {
+    canSpray = !canSpray;
+    activeTool(sprayTool, canSpray);
+    if(canSpray) {
+      showBrushPanel = false;
+      brushPanel.classList.add('hide');
+      activeTool(brushTool, showBrushPanel);
+
+      sprayPanel.classList.remove('hide');
+    } else {
+      sprayPanel.classList.add('hide');
+    }
+  }
+
+  sprayRadius.addEventListener('mousemove', changeSpray);
+  sprayRadius.addEventListener('click', changeSpray);
+
+  sprayDensity.addEventListener('mousemove', changeSpray);
+  sprayDensity.addEventListener('click', changeSpray);
+
+  function changeSpray() {
+    radius = sprayRadius.value;
+    density = sprayDensity.value;
   }
 
 // CLEAR TOOL
@@ -338,8 +407,10 @@
   }
 
 
-
-
+//random for spray
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
 
 
