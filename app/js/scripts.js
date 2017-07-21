@@ -23,7 +23,7 @@
   const sprayRadius = document.querySelector('.sprayRadius');
   const sprayPanel = document.querySelector('.sprayPanel');
   const dlToolLink = document.querySelector('#download');
-
+  const error = '/images/error.png';
   function loadCanvas(){
     const dataURL = localStorage.getItem('canvas');
     const img = new Image;
@@ -31,7 +31,7 @@
     img.onload = function () {
       ctx.drawImage(img, 0, 0);
     };
-    document.getElementById('canvasImg').src = dataURL;
+    document.getElementById('canvasImg').src = dataURL || error;
   }
   function loadCanvasBg(){
     const dataURL = localStorage.getItem('canvasBg');
@@ -40,7 +40,7 @@
     img.onload = function () {
       ctxBg.drawImage(img, 0, 0);
     };
-    document.getElementById('canvasBgImg').src = dataURL;
+    document.getElementById('canvasBgImg').src = dataURL || error;
   }
 
   loadCanvasBg();
