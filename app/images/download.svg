@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1 Basic//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-basic.dtd">
+<svg version="1.1" baseProfile="basic" id="Arrow_1_"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px"
+	 viewBox="0 0 500 500" xml:space="preserve" fill="#dcdcdc"
+	 >
+  <metadata>
+    <?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+    <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.6-c011 79.156380, 2014/06/19-23:40:37        ">
+     <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+        xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+        xmlns:stEvt="http://ns.adobe.com/xap/1.0/sType/ResourceEvent#"
+        xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+        xmlns:xmpRights="http://ns.adobe.com/xap/1.0/rights/"
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+       xmpMM:DocumentID="xmp.did:06f2b2d2ba4c4ed87a9178df618270de"
+       xmpMM:OriginalDocumentID="xmp.did:06f2b2d2ba4c4ed87a9178df618270de"
+       xmpMM:InstanceID="xmp.iid:06f2b2d2ba4c4ed87a9178df618270de"
+       xmp:ModifyDate="2015-04-10T12:22:48+02:00"
+       xmp:MetadataDate="2015-04-10T12:22:48+02:00"
+       xmpRights:Marked="True"
+       xmpRights:WebStatement="http://www.adobe.com/legal/general-terms.html">
+       <xmpMM:History>
+        <rdf:Seq>
+         <rdf:li
+          stEvt:action="saved"
+          stEvt:instanceID="xmp.iid:06f2b2d2ba4c4ed87a9178df618270de"
+          stEvt:when="2015-04-10T12:22:48+02:00"/>
+        </rdf:Seq>
+       </xmpMM:History>
+       <xmpRights:UsageTerms>
+        <rdf:Alt>
+         <rdf:li xml:lang="x-default">This work is licensed under the Adobe General Terms of Use http://www.adobe.com/legal/general-terms.html.</rdf:li>
+        </rdf:Alt>
+       </xmpRights:UsageTerms>
+       <dc:publisher>
+        <rdf:Bag>
+         <rdf:li>Adobe Systems Incorporated</rdf:li>
+        </rdf:Bag>
+       </dc:publisher>
+      </rdf:Description>
+     </rdf:RDF>
+    </x:xmpmeta>
+    <?xpacket end="r"?>
+  </metadata>
+<g>
+	<path d="M465.3,292.8c-15.4,0-28.1,12.5-28.1,28.1v123H62.8v-123c0-15.5-12.5-28.1-28.1-28.1S6.7,305.3,6.7,320.8v151.1
+		c0,15.4,12.5,28.1,28.1,28.1h430.5c15.5,0,28.1-12.5,28.1-28.1V320.8C493.4,305.3,480.9,292.8,465.3,292.8z"/>
+	<path d="M230.4,356c5.2,5.2,12.4,8.2,19.8,8.2c7.4,0,14.5-2.9,19.8-8.2L383,243c10.9-10.9,10.9-28.7,0-39.6
+		c-10.9-10.9-28.7-10.9-39.6,0l-65.1,65.1V28.1c0-15.4-12.5-28.1-28.1-28.1s-28.1,12.5-28.1,28.1v240.5L157,203.4
+		c-11-10.9-28.8-10.9-39.7,0s-10.9,28.7,0,39.6L230.4,356z"/>
+</g>
+</svg>

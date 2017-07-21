@@ -1,14 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>HTML5 Canvas</title>
+  <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
+  <!--build:css css/styles.min.css-->
   <link rel="stylesheet" href="/css/styles.css">
+  <!--endbuild-->
 </head>
-<body>
-<canvas id="draw" width="800" height="800"></canvas>
-<img id="canvasImg">
 
+<body
+  ondragover="dragOver(event)"
+  ondrop="drop(event)">
+
+  <header>
+    <h1>
+      <span>S</span>
+      <span>k</span>
+      <span>e</span>
+      <span>t</span>
+      <span>c</span>
+      <span>h</span>
+    </h1>
+  </header>
+
+  <canvas id="draw" width="800" height="450"></canvas>
+  <canvas id="canvasBg" width="800" height="450"></canvas>
+  <!-- <span class="preview"></span> -->
+  <div class="imgNav drag"
+  draggable="true"
+  ondragstart="dragStart(event)"
+  src="images/bg.png"
+  id="imgNav">
+  <div class="imgNavTitle"><span class="cross" id="imgNavCross">&#x2715;</span></div>
+    <img id="canvasImg" draggable="false" />
+    <img id="canvasBgImg" draggable="false" />
+</div>
+<div class="brushPanel hide"
+      id="brushPanel">
+  <div class="toolTitle panelTitle"><span class="cross" id="panelCross">&#x2715;</span></div>
+  <label for="brushSize" class="sizeLabel"> Size</label>
+  <div class="brushSizePreviewCont">
+    <label for="brushSize" class="brushSizePreview"></label>
+  </div>
+  <input type="range" class="brushSize" id="brushSize" value="10" min="1" max="80">
+
+  <label for="brushOpacity">Opacity</label>
+  <input type="range" class="brushOpacity"  value="1" min="0.1" max="1" step=".1" id="brushOpacity">
+</div>
+
+<div class="sprayPanel hide"
+      id="sprayPanel">
+  <div class="toolTitle sprayPaneTitle"><span class="cross" id="sprayPanelCross">&#x2715;</span></div>
+  <label for="sprayDensity" class="sizeLabel"> Density</label>
+  <!-- <div class="brushSizePreviewCont">
+    <label for="brushSize" class="brushSizePreview"></label>
+  </div> -->
+  <input type="range" class="sprayDensity" id="sprayDensity" value="50" min="5" max="300">
+
+  <label for="sprayRadius">Radius</label>
+  <input type="range" class="sprayRadius"  value="20" min="20" max="80" step="1" id="sprayRadius">
+</div>
+  <div
+    class="toolbar drag" id="drag-tool"
+    draggable="true"
+    ondragstart="dragStart(event)">
+    <div class="toolTitle">&#x2715;</div>
+    <div class="tool brush" data-tool-tip="Brush Size &amp; Opacity"></div>
+    <div class="tool rainbow" data-tool-tip="Rainbow Brush Tool"></div>
+    <div class="tool spray" data-tool-tip="Spray Can Tool"></div>
+    <div class="tool bg" data-tool-tip="Change Background Colour"></div>
+    <div class="tool eraser" id="eraserTool" data-tool-tip="Eraser Tool"></div>
+    <div class="tool nav active" data-tool-tip="Navigator Hide/Show"></div>
+    <div class="tool save" data-tool-tip="Save Canvas"></div>
+    <div class="tool clear" data-tool-tip="Clear Canvas"></div>
+    <div class="tool dl" data-tool-tip="Download As PNG"><a id="download" ></a></div>
+    <input type="color" class="tool colorSelector" value="#e53935" data-tool-tip="Select Colour">
+
+  </div>
+  <!-- build:js js/app.min.js-->
+  <script src="js/scripts.js" charset="utf-8"></script>
+  <script src="js/drag.js" charset="utf-8"></script>
+  <!--endbuild-->
 </body>
-<script src="js/scripts.js" charset="utf-8"></script>
+
+
 </html>
